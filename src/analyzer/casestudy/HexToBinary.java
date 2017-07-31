@@ -21,8 +21,7 @@ public class HexToBinary {
 
 			if(('0' <= ch && ch <= '9') || ('a' <= ch && ch <= 'f')){
 
-				String binary = Integer.toBinaryString(Integer.parseInt(asciiIntToString(ch), 16));
-				binary = String.format("%04d", Integer.parseInt(binary));
+				String binary = String.format("%04d", Integer.parseInt(asciiToBinaryString(ch)));
 				sb.append(binary);
 
 			}
@@ -35,8 +34,14 @@ public class HexToBinary {
 
 	}
 
+	private static String asciiToBinaryString(int ch) {
+		String binary = Integer.toBinaryString(Integer.parseInt(asciiIntToString(ch), 16));
+		return binary;
+	}
+
 	private static String asciiIntToString(int ch){
 		return String.valueOf((char)ch);
 	}
+
 
 }
