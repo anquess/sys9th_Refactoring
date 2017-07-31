@@ -12,21 +12,15 @@ public class HexToBinary {
 	 */
 	public static String hexToBinary(String hex){
 
-		String data = new String();
 		StringBuilder sb = new StringBuilder();
 
 		for(int j = 0; j < hex.length(); j++){
-
 			if(isHexString(hex.charAt(j))){
 				sb.append(asciiToBinaryString4d(hex.charAt(j)));
 			}
-
 		}
 
-		data = sb.toString();
-		sb.delete(0, sb.length());
-		return data;
-
+		return sb.toString();
 	}
 
 	private static boolean isHexString(int ch) {
