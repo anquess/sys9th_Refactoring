@@ -19,7 +19,7 @@ public class HexToBinary {
 
 			int ch = hex.charAt(j);
 
-			if((48 <= ch && ch <= 57) || (97 <= ch && ch <= 102)){
+			if(('0' <= ch && ch <= '9') || ('a' <= ch && ch <= 'f')){
 
 				String str = String.valueOf((char)ch);
 				String binary = Integer.toBinaryString(Integer.parseInt(str, 16));
