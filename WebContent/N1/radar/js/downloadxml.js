@@ -1,7 +1,7 @@
 /**
-*�񓯊��_�E�����[�h�Ɏg�p����XMLHttp�C���X�^���X��Ԃ��܂��B 
-*���̃��\�b�h�͗�O���X���[���܂��񂪁A
-*���炩�̗��R�Ńu���E�U��XmlHttp���T�|�[�g���Ă��Ȃ��ꍇ��NULL��Ԃ��܂��B
+*非同期ダウンロードに使用するXMLHttpインスタンスを返します。
+*このメソッドは例外をスローしませんが、
+*何らかの理由でブラウザがXmlHttpをサポートしていない場合はNULLを返します。
 * @return {XMLHttpRequest | Null}
 */
 function createXmlHttpRequest() {
@@ -18,10 +18,10 @@ function createXmlHttpRequest() {
 };
 
 /**
-*���̊֐��́AXMLHttpRequest��open / send�֐������b�v���܂��B
-* URL���w�肵�āA�X�e�[�^�X�R�[�h��200�̏ꍇ�̓R�[���o�b�N���Ăяo���܂��B
-* @param {String} url�擾����URL
-* @param {Function} callback��x�Ăяo���֐����擾���܂��B
+*この関数は、XMLHttpRequestのopen / send関数をラップします。
+* URLを指定して、ステータスコードが200の場合はコールバックを呼び出します。
+* @param {String} url取得するURL
+* @param {Function} callback一度呼び出す関数を取得します。
 */
 function downloadUrl(url, callback) {
  var status = -1;
@@ -35,7 +35,7 @@ function downloadUrl(url, callback) {
      try {
        status = request.status;
      } catch (e) {
-       // �ʏ�A���N�G�X�g��FF�Ń^�C���A�E�g�������Ƃ������܂��B
+       // 通常、リクエストはFFでタイムアウトしたことを示します。
      }
      if ((status == 200) || (status == 0)) {
        callback(request.responseText, request.status);
@@ -52,9 +52,9 @@ function downloadUrl(url, callback) {
 };
 
 /**
-*�w�肳�ꂽXML���������͂��A��͂��ꂽ�h�L�������g��DOM�f�[�^�\���̂ɕԂ��܂��B
-*���̊֐��́AXML��͂����̃u���E�U�ŃT�|�[�g����Ă��Ȃ��ꍇ�A���DOM�m�[�h��Ԃ��܂��B
-* @param {string} str XML������
+*指定されたXML文字列を解析し、解析されたドキュメントをDOMデータ構造体に返します。
+*この関数は、XML解析がこのブラウザでサポートされていない場合、空のDOMノードを返します。
+* @param {string} str XML文字列
 * @return {Element | Document} DOM
 */
 function xmlParse(str) {
@@ -72,7 +72,7 @@ function xmlParse(str) {
 }
 
 /**
-*�y�[�W��JavaScript�t�@�C����ǉ����܂��B
+*ページにJavaScriptファイルを追加します。
 * @param {string} url
 */
 function downloadScript(url) {
