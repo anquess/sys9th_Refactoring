@@ -64,9 +64,9 @@ public class AircraftSerch  extends Thread {
 					int i=0;
 					int k=0;
 
-						if(posi[0]==null){System.out.println("oppaiposi");}
-						if(velo[0]==null){System.out.println("oppaivelo");}
-						if(call[0]==null){System.out.println("oppaicall");}
+						if(posi[0]==null){System.out.println("Posi is null");}
+						if(velo[0]==null){System.out.println("Vello is null");}
+						if(call[0]==null){System.out.println("Call is null");}
 						while(posi[i]!=null){
 							if(call[i]==null || posi[i]==null || velo[i]==null){System.out.println("Null\n\n");}
 							else{
