@@ -14,24 +14,24 @@ public class RealData extends Thread{
 	public boolean doin = true;
 
 	public void run(){
-		SensorAccessObject testSOA = new SensorAccessObject(ipAddress, portNum);
+		SensorAccessObject sao = new SensorAccessObject(ipAddress, portNum);
 
 		/* SBS-3と接続 */
-		testSOA.connect();
+		sao.connect();
 		System.out.println("*** SBS-3 接続 ***");
 
 		try{
 
 			/* データを受信し解析処理を呼び出す */
 			while(doin){
-				String hex = testSOA.readSensor();
+				String hex = sao.readSensor();
 				EvenAndOddMatcher.analyzeData(hex);
 			}
 
 		}finally{
 
 			/* SBS-3との接続を切断 */
-			testSOA.close();
+			sao.close();
 			System.out.println("*** SBS-3 切断 ***");
 		}
 
