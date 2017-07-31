@@ -25,7 +25,9 @@ public class RealData extends Thread{
 			/* データを受信し解析処理を呼び出す */
 			while(doin){
 				String hex = sao.readSensor();
-				EvenAndOddMatcher.analyzeData(hex);
+				if(hexRawDataCheck(hex)){
+					EvenAndOddMatcher.analyzeData(hex);
+				}
 			}
 
 		}finally{
@@ -44,5 +46,18 @@ public class RealData extends Thread{
 	public void setDoin(boolean doin) {
 		this.doin = doin;
 	}
+
+	/**
+	 * SBS-3から受信した生データ(16進数表記かつスペースで区切られている)のフォーマットが正しいか判別
+	 * @param hexRawData
+	 * @return フォーマットが正しいときtrueを返す
+	 */
+	private static boolean hexRawDataCheck(String hexRawData){
+		if(hexRawData.length() == 75){
+			return hexRawData.substring(0,0+8).equals("10 02 01") && hexRawData.substring(63,63+5).equals("10 03");
+		}
+		return  false;
+	}
+
 
 }
