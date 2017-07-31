@@ -17,10 +17,8 @@ public class HexToBinary {
 
 		for(int j = 0; j < hex.length(); j++){
 
-			int ch = hex.charAt(j);
-
-			if(('0' <= ch && ch <= '9') || ('a' <= ch && ch <= 'f')){
-				sb.append(asciiToBinaryString4d(ch));
+			if(isHexString(hex.charAt(j))){
+				sb.append(asciiToBinaryString4d(hex.charAt(j)));
 			}
 
 		}
@@ -29,6 +27,10 @@ public class HexToBinary {
 		sb.delete(0, sb.length());
 		return data;
 
+	}
+
+	private static boolean isHexString(int ch) {
+		return ('0' <= ch && ch <= '9') || ('a' <= ch && ch <= 'f');
 	}
 
 	private static String asciiToBinaryString4d(int ch) {
@@ -44,6 +46,7 @@ public class HexToBinary {
 	private static String asciiIntToString(int ch){
 		return String.valueOf((char)ch);
 	}
+
 
 
 }
