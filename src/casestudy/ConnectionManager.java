@@ -9,9 +9,9 @@ import java.sql.SQLException;
  */
 public class ConnectionManager {
 	/** データベース接続URL */
-	private static final String URL = "jdbc:oracle:thin:@DB00:1521:ascdb";
+	private static final String URL = "jdbc:oracle:thin:@192.168.1.17:1521/ascpdb01";
 	/** ユーザー名 */
-	private static final String USER = "asc45th";
+	private static final String USER = "ASC45th";
 	/** パスワード */
 	private static final String PASSWORD = "system";
 
