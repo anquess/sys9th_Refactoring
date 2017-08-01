@@ -151,12 +151,14 @@ public class AircraftSerch  extends Thread {
 
 
 				}
+
 			}catch(SQLException | InterruptedException e){
 							e.printStackTrace();
 
 			} catch (IOException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
+
 			}
 
 		}

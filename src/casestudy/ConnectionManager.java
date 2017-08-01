@@ -9,7 +9,7 @@ import java.sql.SQLException;
  */
 public class ConnectionManager {
 	/** データベース接続URL */
-	private static final String URL = "jdbc:oracle:thin:@192.168.1.17:1521/ascpdb01";
+	private static final String URL = "jdbc:oracle:thin:@192.168.1.17:1521/ASCPDB01";
 	/** ユーザー名 */
 	private static final String USER = "ASC45th";
 	/** パスワード */
@@ -25,6 +25,7 @@ public class ConnectionManager {
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 		} catch(SQLException e) {
+			System.out.println("接続失敗");
 			e.printStackTrace();
 			throw e;
 		}
