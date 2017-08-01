@@ -19,12 +19,14 @@ public class ConnectionManager {
 	/**
 	 * データベースの接続を取得する。
 	 * @return データベースの接続
+	 * @throws Exception
 	 */
-	public static synchronized Connection getConnection() throws SQLException {
+	public static synchronized Connection getConnection() throws Exception {
 		Connection con = null;
 		try {
+			Class.forName("oracle.jdbc.OracleDriver"); //
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-		} catch(SQLException e) {
+		} catch(SQLException | ClassNotFoundException e) {
 			System.out.println("接続失敗");
 			e.printStackTrace();
 			throw e;

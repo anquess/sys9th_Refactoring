@@ -31,6 +31,9 @@ public class InsertDB {
 		}catch (SQLException e) {
 			System.out.println("1登録に失敗しました");
 			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
 		try {
 			if(con != null){
@@ -63,6 +66,9 @@ public class InsertDB {
 
 		}catch (SQLException e) {
 			System.out.println("2登録に失敗しました");
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		try {
@@ -97,6 +103,9 @@ public class InsertDB {
 
 		}catch (SQLException e) {
 			System.out.println("3登録に失敗しました");
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		try {

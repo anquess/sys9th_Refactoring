@@ -19,6 +19,9 @@ public class ConnectDBTest {
 		}catch (SQLException e) {
 			System.out.println("接続に失敗しました");
 			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
 
 		try {

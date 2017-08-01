@@ -24,6 +24,9 @@ public class ConnectionManagerTest {
 				// TODO 自動生成された catch ブロック
 				e1.printStackTrace();
 				fail();
+			} catch (Exception e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
 			}
 	}
 	@Test
@@ -42,6 +45,10 @@ public class ConnectionManagerTest {
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
+			fail();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			fail("a");
 		}finally {
 			try {
 				con.close();

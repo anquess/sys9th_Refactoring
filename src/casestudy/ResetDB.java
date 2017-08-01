@@ -12,7 +12,12 @@ public class ResetDB {
 	public void resetDB() throws SQLException {
 
 		Connection   con = null;
-		con = ConnectionManager.getConnection();
+		try {
+			con = ConnectionManager.getConnection();
+		} catch (Exception e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
 		System.out.println("DB接続完了");
 
 		//Statement stmt = null;

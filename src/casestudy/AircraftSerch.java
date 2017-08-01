@@ -159,6 +159,9 @@ public class AircraftSerch  extends Thread {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 
+			} catch (Throwable e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
 			}
 
 		}
