@@ -50,7 +50,7 @@ public class ConnectionManagerTest {
 				e.printStackTrace();
 			}
 		}
-		assertThat(actual, is(3));
+		assertThat(actual, is(42));
 
 	}
 
