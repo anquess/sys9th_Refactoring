@@ -15,6 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="X:/share/Public/ソフトウェア/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="X:/share/Public/システム8期/修了ケーススタディ関連/DB・表示系/ojdbc6.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
