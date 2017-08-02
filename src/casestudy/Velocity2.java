@@ -9,15 +9,9 @@ public class Velocity2 {
 
 
 	private String modes;
-
-
-
 	private float h_velo;
-
 	private float v_velo;
-
 	private float h_dir;
-
 	private float v_dir;
 
 	/**
@@ -75,4 +69,18 @@ public class Velocity2 {
 	public void setV_dir(float v_dir) {
 		this.v_dir = v_dir;
 	}
+	public String veloToString(String subject){
+		if(subject == "h_velo"){
+			return String.valueOf(this.getH_velo());
+		}else if(subject == "v_velo"){
+			return String.valueOf(this.getV_velo());
+		}else if(subject == "h_dir"){
+			return String.valueOf(this.getH_dir());
+		}else if(subject == "v_dir"){
+			return String.valueOf(this.getV_dir());
+		}else{
+			throw new IllegalArgumentException();
+		}
+	}
+
 }

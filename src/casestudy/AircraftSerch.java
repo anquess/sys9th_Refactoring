@@ -172,16 +172,8 @@ public class AircraftSerch  extends Thread {
 	private String veloToString(Velocity2 velo, String subject){
 		if(velo == null){
 			return "????????";
-		}else if(subject == "h_velo"){
-			return String.valueOf(velo.getH_velo());
-		}else if(subject == "v_velo"){
-			return String.valueOf(velo.getV_velo());
-		}else if(subject == "h_dir"){
-			return String.valueOf(velo.getH_dir());
-		}else if(subject == "v_dir"){
-			return String.valueOf(velo.getV_dir());
 		}else{
-			throw new IllegalArgumentException();
+			return velo.veloToString(subject);
 		}
 	}
 
