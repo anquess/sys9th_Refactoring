@@ -166,7 +166,7 @@ public class AircraftSerch  extends Thread {
 	private void veloSetAttribute(Velocity2 velo, Element aircraft) {
 		String subjects[] = {"h_velo","v_velo","h_dir","v_dir"};
 		for(String subject:subjects){
-			aircraft.setAttribute("h_velo",veloToString(velo,subject));
+			aircraft.setAttribute(subject,veloToString(velo,subject));
 		}
 	}
 	private String veloToString(Velocity2 velo, String subject){
