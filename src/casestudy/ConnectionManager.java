@@ -14,24 +14,34 @@ public class ConnectionManager {
 	private static final String USER = "ASC45th";
 	/** パスワード */
 	private static final String PASSWORD = "system";
+	/**
+	 * コネクション
+	 */
+	private static Connection con;
 
-
+	/**
+	 * SingleTon
+	 * @throws Exception
+	 */
+	private static void connectionMaker() throws Exception{
+		if(con != null){
+			try {
+				Class.forName("oracle.jdbc.OracleDriver"); //
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
+			} catch(SQLException | ClassNotFoundException e) {
+				System.out.println("接続失敗");
+				e.printStackTrace();
+				throw e;
+			}
+		}
+	}
 	/**
 	 * データベースの接続を取得する。
 	 * @return データベースの接続
 	 * @throws Exception
 	 */
 	public static synchronized Connection getConnection() throws Exception {
-		Connection con = null;
-		try {
-			Class.forName("oracle.jdbc.OracleDriver"); //
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-		} catch(SQLException | ClassNotFoundException e) {
-			System.out.println("接続失敗");
-			e.printStackTrace();
-			throw e;
-		}
-
+		connectionMaker();
 		return con;
 	}
 }
