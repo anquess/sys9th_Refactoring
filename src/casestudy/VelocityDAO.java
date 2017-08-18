@@ -48,7 +48,7 @@ public class VelocityDAO {
 				stmt.setString(1,posi[i].getModes());
 				res = stmt.executeQuery();//sqlをとってくる
 				if(res.next()){
-					velo[i] = new Velocity2(//列の名前を書く.その列のデータをとってきてくれる
+							velo[i] = new Velocity2(//列の名前を書く.その列のデータをとってきてくれる
 							res.getString("modes"),
 							res.getFloat("h_velocity"),
 							res.getFloat("v_velocity"),

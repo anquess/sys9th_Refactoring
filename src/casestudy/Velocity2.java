@@ -5,7 +5,7 @@ package casestudy;
 *DBから取り出したVelocity(水平面の速度・向き　垂直面の速度・上昇下降)情報を管理するbeans
 *
 */
-public class Velocity2 {
+public class Velocity2 extends DbItem {
 
 
 	private String modes;
