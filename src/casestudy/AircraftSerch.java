@@ -37,12 +37,21 @@ public class AircraftSerch  extends Thread {
 	 */
 	public void run(){
 		Connection connection = null;
-		Velocity2[] velo = null;
-		Position[] posi = null;
-		Callsign[] call = null;
+		Velocity2[] velocity = null;
+		Position[] position = null;
+		Callsign[] callSign = null;
 
 		while(dox){
 			try{
+/*
+				GetPositionDao positionDao = new GetPositionDao();
+				GetVelocityDao velocityDao = new GetVelocityDao();
+				GetCallSignDao callSighnDao = new GetCallSignDao();
+
+				position = positionDao.findposi();
+				velocity = velocityDao.findvelo(position);
+				callSign = callSighnDao.findcall(position);
+*/
 				connection = ConnectionManager.getConnection();
 				System.out.println("接続完了");
 
@@ -50,40 +59,40 @@ public class AircraftSerch  extends Thread {
 				PositionDAO poDAO = new PositionDAO(connection);
 				CallsignDAO caDAO = new CallsignDAO(connection);
 
-				posi = poDAO.findposi();
-				velo = veDAO.findvelo(posi);
-				call = caDAO.findcall(posi);
+				position = poDAO.findposi();
+				velocity = veDAO.findvelo(position);
+				callSign = caDAO.findcall(position);
 
 				Thread.sleep(3000);
 
-				if(posi == null || call == null || velo == null ){
+				if(position == null || callSign == null || velocity == null ){
 					System.out.println("そのような航空機はいません");
 				}else{
 					int i=0;
 					int k=0;
-						if(posi[0]==null){
-							System.out.println("Posi is null");
+						if(position[0]==null){
+							System.out.println("Position is null");
 						}
-						if(velo[0]==null){
-							System.out.println("Vello is null");
+						if(velocity[0]==null){
+							System.out.println("Velocity is null");
 						}
-						if(call[0]==null){
-							System.out.println("Call is null");
+						if(callSign[0]==null){
+							System.out.println("CallSign is null");
 						}
 
-						while(posi[i]!=null){
-							if(call[i]==null || posi[i]==null || velo[i]==null){
+						while(position[i]!=null){
+							if(callSign[i]==null || position[i]==null || velocity[i]==null){
 								System.out.println("Null\n\n");
 							}else{
-								System.out.println(posi[i].getModes());
-								System.out.println(call[i].getCallsign());
-								System.out.println(posi[i].getLat());
-								System.out.println(posi[i].getLng());
-								System.out.println(posi[i].getAlt());
-								System.out.println(velo[i].getH_velo());
-								System.out.println(velo[i].getV_velo());
-								System.out.println(velo[i].getH_dir());
-								System.out.println(velo[i].getV_dir());
+								System.out.println(position[i].getModes());
+								System.out.println(callSign[i].getCallsign());
+								System.out.println(position[i].getLat());
+								System.out.println(position[i].getLng());
+								System.out.println(position[i].getAlt());
+								System.out.println(velocity[i].getH_velo());
+								System.out.println(velocity[i].getV_velo());
+								System.out.println(velocity[i].getH_dir());
+								System.out.println(velocity[i].getV_dir());
 								System.out.println();
 							}
 							i++;
@@ -102,25 +111,25 @@ public class AircraftSerch  extends Thread {
 						Element aircrafts = document.createElement("aircrafts");
 						document.appendChild(aircrafts);
 
-						while(posi[i]!=null){
+						while(position[i]!=null){
 							System.out.println("XML1機分作成");
 							Element aircraft = document.createElement("aircraft");
 							aircrafts.appendChild(aircraft);
-							aircraft.setAttribute("modeSaddress",posi[i].getModes());
+							aircraft.setAttribute("modeSaddress",position[i].getModes());
 
-							if(call[i]!=null){
-								aircraft.setAttribute("callsign",call[i].getCallsign() );
+							if(callSign[i]!=null){
+								aircraft.setAttribute("callsign",callSign[i].getCallsign() );
 							}else{
 								aircraft.setAttribute("callsign","????????");
 							}
 
-							aircraft.setAttribute("latitude",String.valueOf(posi[i].getLat()));
-							aircraft.setAttribute("longitude",String.valueOf(posi[i].getLng()));
-							aircraft.setAttribute("altitude",String.valueOf(posi[i].getAlt()));
+							aircraft.setAttribute("latitude",String.valueOf(position[i].getLat()));
+							aircraft.setAttribute("longitude",String.valueOf(position[i].getLng()));
+							aircraft.setAttribute("altitude",String.valueOf(position[i].getAlt()));
 
-							veloSetAttribute(velo[i], aircraft);
+							veloSetAttribute(velocity[i], aircraft);
 
-							aircraft.setAttribute("timestamp",String.valueOf(posi[i].getTimestamp()));
+							aircraft.setAttribute("timestamp",String.valueOf(position[i].getTimestamp()));
 							i++;
 						}
 
@@ -131,9 +140,9 @@ public class AircraftSerch  extends Thread {
 						write(file, document);
 
 						for(k=0;k<i;k++){
-							posi[k]=null;
-							velo[k]=null;
-							call[k]=null;
+							position[k]=null;
+							velocity[k]=null;
+							callSign[k]=null;
 						}
 
 						i=0;
@@ -156,7 +165,6 @@ public class AircraftSerch  extends Thread {
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
-
 		}
 
 
