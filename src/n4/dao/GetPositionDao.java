@@ -1,6 +1,5 @@
 package n4.dao;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -14,22 +13,11 @@ public class GetPositionDao extends GetDao {
 
 	public Position[] findposi() throws SQLException {
 		Position position[] = new Position[100];
-		try{
-			open();
-			super.setSql(getSql());
-			PreparedStatement stmt = super.getStmt();
-			ResultSet result = stmt.executeQuery();
-			int i=0;
-			while(result.next()){
-				executeQuery(position, result,i);
-				i++;
-			}
-
-		}finally{
-			close();
-		}
+		executeQuery(position);
 		return position;
 	}
+
+
 
 	@Override
 	public void executeQuery(DbItem[] position, ResultSet result,int i) throws SQLException {
