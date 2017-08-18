@@ -6,7 +6,7 @@ package casestudy;
  *DBから取り出したCallsign情報を管理するbeans
  *
  */
-public class Callsign {
+public class Callsign extends DbItem {
 
 
 
