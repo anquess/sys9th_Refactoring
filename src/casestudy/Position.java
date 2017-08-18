@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 *DBから取り出したPosition（緯度経度、高度）情報を管理するbeans
 *
 */
-public class Position {
+public class Position extends DbItem {
 
 	private String modes;
 
