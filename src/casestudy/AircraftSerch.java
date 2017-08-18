@@ -36,19 +36,19 @@ public class AircraftSerch  extends Thread {
 	 * DB-ITEMからXMLを作成するメソッド
 	 */
 	public void run(){
-		Connection con = null;
+		Connection connection = null;
 		Velocity2[] velo = null;
 		Position[] posi = null;
 		Callsign[] call = null;
 
 		while(dox){
 			try{
-				con = ConnectionManager.getConnection();
+				connection = ConnectionManager.getConnection();
 				System.out.println("接続完了");
 
-				VelocityDAO veDAO = new VelocityDAO(con);
-				PositionDAO poDAO = new PositionDAO(con);
-				CallsignDAO caDAO = new CallsignDAO(con);
+				VelocityDAO veDAO = new VelocityDAO(connection);
+				PositionDAO poDAO = new PositionDAO(connection);
+				CallsignDAO caDAO = new CallsignDAO(connection);
 
 				posi = poDAO.findposi();
 				velo = veDAO.findvelo(posi);
@@ -150,8 +150,8 @@ public class AircraftSerch  extends Thread {
 		}	// While文終了
 
 		try{
-			if(con != null){
-				con.close();
+			if(connection != null){
+				connection.close();
 				System.out.println("クローズ完了だよー");
 			}
 		}catch(SQLException e){
