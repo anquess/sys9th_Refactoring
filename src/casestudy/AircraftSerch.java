@@ -18,6 +18,10 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import n4.dao.GetCallSignDao;
+import n4.dao.GetPositionDao;
+import n4.dao.GetVelocityDao;
+
 /**
  *
  * DB-ITEMからXMLを作成するスレッド
@@ -43,25 +47,17 @@ public class AircraftSerch  extends Thread {
 
 		while(dox){
 			try{
-/*
-				GetPositionDao positionDao = new GetPositionDao();
-				GetVelocityDao velocityDao = new GetVelocityDao();
-				GetCallSignDao callSighnDao = new GetCallSignDao();
+				connection = ConnectionManager.getConnection();
+				System.out.println("接続完了");
+
+				GetPositionDao positionDao = new GetPositionDao(connection);
+				GetVelocityDao velocityDao = new GetVelocityDao(connection);
+				GetCallSignDao callSighnDao = new GetCallSignDao(connection);
 
 				position = positionDao.findposi();
 				velocity = velocityDao.findvelo(position);
 				callSign = callSighnDao.findcall(position);
-*/
-				connection = ConnectionManager.getConnection();
-				System.out.println("接続完了");
 
-				VelocityDAO veDAO = new VelocityDAO(connection);
-				PositionDAO poDAO = new PositionDAO(connection);
-				CallsignDAO caDAO = new CallsignDAO(connection);
-
-				position = poDAO.findposi();
-				velocity = veDAO.findvelo(position);
-				callSign = caDAO.findcall(position);
 
 				Thread.sleep(3000);
 
