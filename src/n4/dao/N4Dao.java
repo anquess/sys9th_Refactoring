@@ -17,6 +17,10 @@ public abstract class N4Dao {
 	private PreparedStatement stmt;		// SQL文を解析して対象のサーバに実行するオブジェクト
 
 
+	public N4Dao(Connection con) {
+		super();
+		this.con = con;
+	}
 	/**
 	 * コンストラクタ
 	 * @param server	DBサーバ(IPアドレスorFQDN)

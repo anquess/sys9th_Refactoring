@@ -1,5 +1,6 @@
 package n4.dao;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -10,6 +11,12 @@ public class GetPositionDao extends GetDao {
 
 	private  final String SQL = "select * from position where timestamp in (select max(timestamp) from position group by modes)"
 				+ "and  timestamp > systimestamp-0.0008";
+
+	public GetPositionDao(Connection connection) {
+		super(connection);
+	}
+
+
 
 	public Position[] findposi() throws SQLException {
 		Position position[] = new Position[100];

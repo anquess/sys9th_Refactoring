@@ -1,5 +1,6 @@
 package n4.dao;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -8,7 +9,9 @@ import casestudy.Position;
 import casestudy.Velocity2;
 
 public class GetVelocityDao extends GetDao {
-
+	public GetVelocityDao(Connection connection){
+		super(connection);
+	}
 	private  final String SQL = "select * from velocity where timestamp in (select max(timestamp) from velocity group by modes) and modes = ?";
 
 	public Velocity2[] findvelo(Position[] position) throws SQLException {

@@ -1,5 +1,6 @@
 package n4.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,9 +10,12 @@ import casestudy.Position;
 
 public abstract class GetDao extends N1PramDao {
 
+	public GetDao(Connection connection){
+		super(connection);
+	}
 	public void executeQuery(DbItem[] dbItem) throws SQLException {
-		try{
-			open();
+//		try{
+//			open();
 			super.setSql(getSql());
 			PreparedStatement stmt = super.getStmt();
 			ResultSet result = stmt.executeQuery();
@@ -20,10 +24,11 @@ public abstract class GetDao extends N1PramDao {
 				executeQuery(dbItem, result,i);
 				i++;
 			}
-
+/*
 		}finally{
 			close();
 		}
+*/
 	}
 
 	public void executeQuery(DbItem[] dbItem, Position[] position) throws SQLException {

@@ -1,5 +1,6 @@
 package n4.dao;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -8,6 +9,9 @@ import casestudy.DbItem;
 import casestudy.Position;
 
 public class GetCallSignDao extends GetDao {
+	public GetCallSignDao(Connection connection){
+		super(connection);
+	}
 
 	private  final String SQL = "select * from callsign where timestamp in (select max(timestamp) from callsign group by modes) and modes = ?";
 
