@@ -178,6 +178,24 @@ public class AircraftSerch  extends Thread {
 				System.err.println("AirCraftSerch 178");
 				e.printStackTrace();
 			}
+			try {
+				if(connection1 != null){
+					connection1.close();
+					System.out.println("1クローズ完了だよー");
+				}
+				if(connection2 != null){
+					connection2.close();
+					System.out.println("2クローズ完了だよー");
+				}
+				if(connection3 != null){
+					connection3.close();
+					System.out.println("3クローズ完了だよー");
+				}
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
 
 		}	// While文終了
 
