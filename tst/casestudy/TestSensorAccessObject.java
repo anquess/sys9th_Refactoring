@@ -1,7 +1,5 @@
 package casestudy;
 
-import casestudy.SensorAccessObject;
-
 public class TestSensorAccessObject {
 
 	private static final String ipAddress = "192.168.3.171";

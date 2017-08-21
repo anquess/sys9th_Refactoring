@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.                                   -->
+
+<!-- 下記内容をContext内に追加
+Oracle DB接続用のConnection Poolingの設定
+設定方法は
+http://reference1.mapinfo.com/software/mapinfo_manager/ja/1_2/security/jndi/tomcatglobal.html より参照
+設定値の意味はhttps://docs.oracle.com/cd/E16338_01/java.112/b56281/concache.htmを参照
+-->
+
+    <Resource auth="Container"
+		connectionCacheName="CXCACHE"
+		connectionCacheProperties="{InitialLimit=200,MaxStatementsLimit=200,MinLimit=50, MaxLimit=200, ValidateConnection=true}"
+		connectionCachingEnabled="true"
+		description="Oracle Datasource"
+		factory="oracle.jdbc.pool.OracleDataSourceFactory"
+		name="jdbc/Oracle"
+		user="ASC45th"
+		password="system"
+		type="oracle.jdbc.pool.OracleDataSource"
+		driverClassName="oracle.jdbc.OracleDriver"
+		url="jdbc:oracle:thin:@192.168.1.17:1521/ascpdb01"  />
+
+</Context>

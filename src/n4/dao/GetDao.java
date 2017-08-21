@@ -15,7 +15,7 @@ public abstract class GetDao extends N1PramDao {
 	}
 	public void executeQuery(DbItem[] dbItem) throws SQLException {
 //		try{
-//			open();
+			open();
 			super.setSql(getSql());
 			PreparedStatement stmt = super.getStmt();
 			ResultSet result = stmt.executeQuery();

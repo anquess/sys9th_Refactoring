@@ -43,8 +43,8 @@ public class Velocity {
 	 * vr_のgetter
 	 * @return vr_
 	 */
-	public double getVr() {
-		return vr_;
+	public float getVr() {
+		return (float)vr_;
 	}
 
 	/**
@@ -59,8 +59,8 @@ public class Velocity {
 	 * vel_のgetter
 	 * @return vel_
 	 */
-	public double getVel() {
-		return vel_;
+	public float getVel() {
+		return (float)vel_;
 	}
 
 	@Override

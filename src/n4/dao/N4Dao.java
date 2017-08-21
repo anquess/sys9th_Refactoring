@@ -1,9 +1,13 @@
 package n4.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public abstract class N4Dao {
 
@@ -43,8 +47,19 @@ public abstract class N4Dao {
 	 * @throws SQLException
 	 */
 	public void open() throws SQLException{
-		String url = "jdbc:oracle:thin:@" + this.server + ":" + this.portNum + "/" + this.dbName;
-		this.con = DriverManager.getConnection(url,this.user,this.password);
+		if(con == null){
+//			String url = "jdbc:oracle:thin:@" + this.server + ":" + this.portNum + "/" + this.dbName;
+//			this.con = DriverManager.getConnection(url,this.user,this.password);
+			Context context;
+			try {
+				context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
+			this.con = ds.getConnection();
+			} catch (NamingException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -58,6 +73,11 @@ public abstract class N4Dao {
 	}
 
 	final void setSql(String sql)throws SQLException{
+		if(con == null){
+			throw new NullPointerException("Connection is null");
+		}if(sql == null){
+			throw new NullPointerException("SQL is null");
+		}
 		stmt =  con.prepareStatement(sql);
 	}
 

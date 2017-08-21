@@ -1,0 +1,8 @@
+1.Tomcatにおけるコネクションプーリング設定
+	Tomcatサーバの「%CATALINA_HOME%\conf」フォルダにある
+	context.xmlファイルにcontext追加情報の.xmlファイルの
+	8行目から26行目を追記する
+	追記個所は、<Context>直下でよい
+
+	Eclipse上であれば、Serversの中の「ローカル・ホストのTomcat・・-config」にある
+	context.xmlに追記

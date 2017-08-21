@@ -86,8 +86,8 @@ public class VelocityDAO {
 			stmt = con.prepareStatement(sql);
 
 			stmt.setString(1,velocity.getModeSAddress());
-			stmt.setDouble(2,velocity.getVelocity().getVel());
-			stmt.setDouble(3,velocity.getVelocity().getVr());
+			stmt.setFloat(2,velocity.getVelocity().getVel());
+			stmt.setFloat(3,velocity.getVelocity().getVr());
 			stmt.setInt(4,velocity.getVelocity().getDeg());
 			stmt.setInt(5,velocity.getVelocity().getS_Vr());
 //			stmt.setLong(6,velocity.getTimeStamp());

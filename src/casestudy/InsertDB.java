@@ -3,6 +3,10 @@ package casestudy;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 import analyzer.casestudy.DB_Item_CallSign;
 import analyzer.casestudy.DB_Item_PlanePosition;
 import analyzer.casestudy.DB_Item_Velocity;
@@ -18,14 +22,16 @@ public class InsertDB {
 	 * @param callsign 解析されたcallsign情報
 	 */
 	public static void callSignInsert(DB_Item_CallSign callsign) {
-		Connection   con = null;
+		Connection   connection = null;
 
 
 		try{
-			con = ConnectionManager.getConnection();
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
+			connection = ds.getConnection();
 			System.out.println("接続完了call");
 
-			CallsignDAO InsCallsign =new CallsignDAO(con);
+			CallsignDAO InsCallsign =new CallsignDAO(connection);
 			InsCallsign.insertcallsign(callsign);
 
 		}catch (SQLException e) {
@@ -36,8 +42,8 @@ public class InsertDB {
 			e.printStackTrace();
 		}
 		try {
-			if(con != null){
-				con.close();
+			if(connection != null){
+				connection.close();
 				System.out.println("クローズ完了");
 			}
 		} catch(SQLException e) {
@@ -55,13 +61,15 @@ public class InsertDB {
 	 * @param position 解析されたPosition情報
 	 */
 	public static void positionInsert(DB_Item_PlanePosition position) {
-		Connection   con = null;
+		Connection   connection = null;
 
 		try{
-			con = ConnectionManager.getConnection();
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
+			connection = ds.getConnection();
 			System.out.println("接続完了posi");
 
-			PositionDAO InsPosition =new PositionDAO(con);
+			PositionDAO InsPosition =new PositionDAO(connection);
 			InsPosition.insertposition(position);
 
 		}catch (SQLException e) {
@@ -72,8 +80,8 @@ public class InsertDB {
 			e.printStackTrace();
 		}
 		try {
-			if(con != null){
-				con.close();
+			if(connection != null){
+				connection.close();
 				System.out.println("クローズ完了");
 			}
 		} catch(SQLException e) {
@@ -92,13 +100,15 @@ public class InsertDB {
 	 * @param velocity 解析されたVelocity情報
 	 */
 	public static void velocityInsert(DB_Item_Velocity velocity) {
-		Connection   con = null;
+		Connection   connection = null;
 
 		try{
-			con = ConnectionManager.getConnection();
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
+			connection = ds.getConnection();
 			System.out.println("接続完了velo");
 
-			VelocityDAO InsVelocity =new VelocityDAO(con);
+			VelocityDAO InsVelocity =new VelocityDAO(connection);
 			InsVelocity.insertvelocity(velocity);
 
 		}catch (SQLException e) {
@@ -109,8 +119,8 @@ public class InsertDB {
 			e.printStackTrace();
 		}
 		try {
-			if(con != null){
-				con.close();
+			if(connection != null){
+				connection.close();
 				System.out.println("クローズ完了");
 			}
 		} catch(SQLException e) {
@@ -118,11 +128,11 @@ public class InsertDB {
 		}
 
 		System.out.println("以下の内容を登録しました");
-		System.out.println(velocity.getModeSAddress());
-		System.out.println(velocity.getVelocity().getS_Vr());
-		System.out.println(velocity.getVelocity().getVr());
-		System.out.println(velocity.getVelocity().getDeg());
-		System.out.println(velocity.getVelocity().getVel());
+		System.out.println("modeS=" + velocity.getModeSAddress());
+		System.out.println("S_Vr=" + velocity.getVelocity().getS_Vr());
+		System.out.println("Vr=" + velocity.getVelocity().getVr());
+		System.out.println("Deg=" + velocity.getVelocity().getDeg());
+		System.out.println("Vel=" + velocity.getVelocity().getVel());
 
 	}
 }

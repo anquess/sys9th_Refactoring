@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,21 +44,42 @@ public class AircraftSerch  extends Thread {
 	 * DB-ITEMからXMLを作成するメソッド
 	 */
 	public void run(){
-		Connection connection = null;
+		Connection connection1 = null;
+		Connection connection2 = null;
+		Connection connection3 = null;
+
 		Velocity2[] velocity = null;
 		Position[] position = null;
 		Callsign[] callSign = null;
 
 		while(dox){
 			try{
-				connection = ConnectionManager.getConnection();
-				System.out.println("接続完了");
+				try {
+					Context context = new InitialContext();
+					DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
+					connection1 = ds.getConnection();
+					connection2 = ds.getConnection();
+					connection3 = ds.getConnection();
 
-				GetPositionDao positionDao = new GetPositionDao(connection);
-				GetVelocityDao velocityDao = new GetVelocityDao(connection);
-				GetCallSignDao callSighnDao = new GetCallSignDao(connection);
+				} catch (NamingException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}catch(NullPointerException e){
+					e.printStackTrace();
+				}
 
-				position = positionDao.findposi();
+				System.out.println("DB読み込み用接続完了");
+
+				GetPositionDao positionDao = new GetPositionDao(connection1);
+				GetVelocityDao velocityDao = new GetVelocityDao(connection2);
+				GetCallSignDao callSighnDao = new GetCallSignDao(connection3);
+				try{
+					position = positionDao.findposi();
+				}catch(NullPointerException e){
+					System.err.println("AirCraftSerch 80");
+					e.printStackTrace();
+				}
 				velocity = velocityDao.findvelo(position);
 				callSign = callSighnDao.findcall(position);
 
@@ -80,6 +105,7 @@ public class AircraftSerch  extends Thread {
 							if(callSign[i]==null || position[i]==null || velocity[i]==null){
 								System.out.println("Null\n\n");
 							}else{
+								System.out.println("DBから読み込み開始");
 								System.out.println(position[i].getModes());
 								System.out.println(callSign[i].getCallsign());
 								System.out.println(position[i].getLat());
@@ -98,7 +124,7 @@ public class AircraftSerch  extends Thread {
 						DocumentBuilder documentBuilder = null;
 						try {
 							documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-						} catch (ParserConfigurationException e) {
+						} catch (ParserConfigurationException e){
 							e.printStackTrace();
 						}
 
@@ -145,21 +171,32 @@ public class AircraftSerch  extends Thread {
 						k=0;
 				}
 			}catch(SQLException | InterruptedException e){
-							e.printStackTrace();
+				e.printStackTrace();
 			}catch (IOException e) {
 				e.printStackTrace();
 			}catch (Throwable e) {
+				System.err.println("AirCraftSerch 178");
 				e.printStackTrace();
 			}
 
 		}	// While文終了
 
 		try{
-			if(connection != null){
-				connection.close();
-				System.out.println("クローズ完了だよー");
+			if(connection1 != null){
+				connection1.close();
+				System.out.println("1クローズ完了だよー");
 			}
+			if(connection2 != null){
+				connection2.close();
+				System.out.println("2クローズ完了だよー");
+			}
+			if(connection3 != null){
+				connection3.close();
+				System.out.println("3クローズ完了だよー");
+			}
+
 		}catch(SQLException e){
+			System.err.println("AirCraftSerch 197");
 			e.printStackTrace();
 		}
 
