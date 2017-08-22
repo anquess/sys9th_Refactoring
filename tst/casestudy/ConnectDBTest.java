@@ -5,6 +5,8 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import n4.dao.ConnectionFactory;
+
 public class ConnectDBTest {
 
 	@Test
@@ -13,13 +15,10 @@ public class ConnectDBTest {
 		Connection con = null;
 
 		try{
-			con = ConnectionManager.getConnection();
+			con = ConnectionFactory.getConnection();
 			System.out.println("DB接続成功");
 
-		}catch (SQLException e) {
-			System.out.println("接続に失敗しました");
-			e.printStackTrace();
-		} catch (Exception e) {
+		}catch (Exception e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}

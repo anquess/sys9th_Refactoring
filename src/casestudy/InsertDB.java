@@ -3,13 +3,10 @@ package casestudy;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
 import analyzer.casestudy.DB_Item_CallSign;
 import analyzer.casestudy.DB_Item_PlanePosition;
 import analyzer.casestudy.DB_Item_Velocity;
+import n4.dao.ConnectionFactory;
 
 /**
  *DAOに接続し、DBにDBーITEMを登録するクラス
@@ -26,9 +23,9 @@ public class InsertDB {
 
 
 		try{
-			Context context = new InitialContext();
-			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
-			connection = ds.getConnection();
+//			Context context = new InitialContext();
+//			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
+			connection = ConnectionFactory.getConnection();
 			System.out.println("接続完了call");
 
 			CallsignDAO InsCallsign =new CallsignDAO(connection);
@@ -64,9 +61,9 @@ public class InsertDB {
 		Connection   connection = null;
 
 		try{
-			Context context = new InitialContext();
-			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
-			connection = ds.getConnection();
+//			Context context = new InitialContext();
+//			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
+			connection = ConnectionFactory.getConnection();
 			System.out.println("接続完了posi");
 
 			PositionDAO InsPosition =new PositionDAO(connection);
@@ -103,9 +100,9 @@ public class InsertDB {
 		Connection   connection = null;
 
 		try{
-			Context context = new InitialContext();
-			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
-			connection = ds.getConnection();
+//			Context context = new InitialContext();
+//			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
+			connection = ConnectionFactory.getConnection();
 			System.out.println("接続完了velo");
 
 			VelocityDAO InsVelocity =new VelocityDAO(connection);

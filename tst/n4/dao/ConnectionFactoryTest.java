@@ -1,5 +1,4 @@
-/*
-package casestudy;
+package n4.dao;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -12,30 +11,27 @@ import java.util.LinkedList;
 
 import org.junit.Test;
 
-public class ConnectionManagerTest {
+public class ConnectionFactoryTest {
 
 	@Test
-	public void test() throws SQLException {
+	public void test() {
 		Connection con = null;
-			try {
-				con = ConnectionManager.getConnection();
-				con.close();
+		try {
+			con = ConnectionFactory.getConnection();
+			con.close();
 
-			} catch (SQLException e1) {
-				// TODO 自動生成された catch ブロック
-				e1.printStackTrace();
-				fail();
-			} catch (Exception e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+		} catch (Exception e) {
+			fail();
+			e.printStackTrace();
+		}
+
 	}
 	@Test
 	public void CallSignTableに接続して数を数えるtest() {
 		int actual = 0;
 		Connection con = null;
 		try {
-			con = ConnectionManager.getConnection();
+			con = ConnectionFactory.getConnection();
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT modes FROM CALLSIGN");
 			LinkedList<String> result = new LinkedList<>();
@@ -43,10 +39,7 @@ public class ConnectionManagerTest {
 				result.add(rs.getString(1));
 			}
 			actual = result.size();
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-			fail();
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 			fail("a");
@@ -63,6 +56,4 @@ public class ConnectionManagerTest {
 	}
 
 
-
 }
-*/

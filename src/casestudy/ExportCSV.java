@@ -1,6 +1,8 @@
 package casestudy;
 
 import java.sql.Connection;
+
+import n4.dao.ConnectionFactory;
 /**
  *
  * DAOに接続し、csvファイルで出力するクラス
@@ -20,7 +22,7 @@ public class ExportCSV {
 
 		try {
 
-			con = ConnectionManager.getConnection();
+			con = ConnectionFactory.getConnection();
 			System.out.println("接続完了");
 
 			CallsignDAO caDAO = new CallsignDAO(con);

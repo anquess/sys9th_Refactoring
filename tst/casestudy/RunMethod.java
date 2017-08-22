@@ -3,6 +3,8 @@ package casestudy;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import n4.dao.ConnectionFactory;
+
 /**
  * AirCraftSerchのrunメソッドにおいて、
  * ConnectionManagerのげｔConnectionでエラーとなるため、
@@ -26,7 +28,7 @@ public class RunMethod extends Thread {
 		Connection con = null;
 		while(loop){
 			try {
-				con = ConnectionManager.getConnection();
+				con = ConnectionFactory.getConnection();
 			}catch(Exception e){
 				this.loop = false;
 				e.printStackTrace();

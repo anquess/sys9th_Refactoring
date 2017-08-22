@@ -5,10 +5,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -22,6 +18,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import n4.dao.ConnectionFactory;
 import n4.dao.GetCallSignDao;
 import n4.dao.GetPositionDao;
 import n4.dao.GetVelocityDao;
@@ -54,20 +51,14 @@ public class AircraftSerch  extends Thread {
 
 		while(dox){
 			try{
-				try {
-					Context context = new InitialContext();
-					DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
-					connection1 = ds.getConnection();
-					connection2 = ds.getConnection();
-					connection3 = ds.getConnection();
+	//					Context context = new InitialContext();
+	//					DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
+				connection1 = ConnectionFactory.getConnection();
+				connection2 = ConnectionFactory.getConnection();
+				connection3 = ConnectionFactory.getConnection();
 
-				} catch (NamingException e) {
-					e.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}catch(NullPointerException e){
-					e.printStackTrace();
-				}
+
+
 
 				System.out.println("DB読み込み用接続完了");
 

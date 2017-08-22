@@ -3,6 +3,8 @@ package casestudy;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import n4.dao.ConnectionFactory;
+
 
 /**
  * DBの全テーブルをリセットするクラス
@@ -13,7 +15,7 @@ public class ResetDB {
 
 		Connection   con = null;
 		try {
-			con = ConnectionManager.getConnection();
+			con = ConnectionFactory.getConnection();
 		} catch (Exception e1) {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
