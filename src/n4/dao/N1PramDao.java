@@ -1,3 +1,4 @@
+/*
 package n4.dao;
 
 import java.sql.Connection;
@@ -18,3 +19,4 @@ public abstract class N1PramDao extends N4Dao {
 	}
 
 }
+*/
