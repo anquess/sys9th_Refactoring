@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import casestudy.DbItem;
 import casestudy.Position;
 
-public abstract class GetDao extends N1PramDao {
+public abstract class GetDao extends N4Dao {
 
 	public GetDao(Connection connection){
 		super(connection);
