@@ -75,7 +75,7 @@ public class AircraftSerch  extends Thread {
 				callSign = callSighnDao.findcall(position);
 
 
-				Thread.sleep(3000);
+//				Thread.sleep(3000);
 
 				if(position == null || callSign == null || velocity == null ){
 					System.out.println("そのような航空機はいません");
@@ -92,7 +92,7 @@ public class AircraftSerch  extends Thread {
 							System.out.println("CallSign is null");
 						}
 
-						while(position[i]!=null){
+/*						while(position[i]!=null){
 							if(callSign[i]==null || position[i]==null || velocity[i]==null){
 								System.out.println("Null\n\n");
 							}else{
@@ -110,7 +110,7 @@ public class AircraftSerch  extends Thread {
 							}
 							i++;
 						}
-
+*/
 						// Documentインスタンスの生成
 						DocumentBuilder documentBuilder = null;
 						try {
@@ -161,7 +161,7 @@ public class AircraftSerch  extends Thread {
 						i=0;
 						k=0;
 				}
-			}catch(SQLException | InterruptedException e){
+			}catch(SQLException e){
 				e.printStackTrace();
 			}catch (IOException e) {
 				e.printStackTrace();
