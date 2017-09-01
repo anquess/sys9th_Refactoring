@@ -69,9 +69,14 @@ public abstract class AircraftFactory {
 
 	}
 
-	//public final AircraftObj create() {
-	//}
+	public abstract AircraftObj createAircaraft();
 
+	public AircraftObj create(){
+		makeAircraftList();
+		AircraftObj aircraftObj= createAircaraft();
+
+		return aircraftObj;
+	}
 
 
 }
