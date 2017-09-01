@@ -1,7 +1,6 @@
 package casestudy;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -161,10 +160,6 @@ public class AircraftSerch  extends Thread {
 						i=0;
 						k=0;
 				}
-			}catch(SQLException e){
-				e.printStackTrace();
-			}catch (IOException e) {
-				e.printStackTrace();
 			}catch (Throwable e) {
 				System.err.println("AirCraftSerch 178");
 				e.printStackTrace();

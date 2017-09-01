@@ -3,7 +3,7 @@ package casestudy;
 public class TestRaspiSensorAccessObject {
 
 	private static final String ipAddress = "192.168.3.172";
-	private static final int portNumber = 30003;
+	private static final int portNumber = 30002;
 
 	/**
 	 * @param args 不使用
