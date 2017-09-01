@@ -20,7 +20,7 @@ public abstract class AircraftFactory {
 
 	private Map<String, List<DbItem>> aircraftList = new HashMap<String, List<DbItem>>();
 
-	private void makeAircraftList() {
+	public void makeAircraftList() {
 
 		try {
 
@@ -38,7 +38,7 @@ public abstract class AircraftFactory {
 
 			GetPositionDao positionDao = new GetPositionDao(connection1);
 			GetVelocityDao velocityDao = new GetVelocityDao(connection2);
-			GetCallSignDao callSighnDao = new GetCallSignDao(connection3);
+			GetCallSignDao callSignDao = new GetCallSignDao(connection3);
 			try {
 				position = positionDao.findposi();
 				for (int i = 0; i < position.length; i++) {
@@ -56,6 +56,7 @@ public abstract class AircraftFactory {
 					aircraftList.get(velocity[i].getModes()).add(velocity[i]);
 				}
 			}
+			callSign = callSignDao.findcall(position);
 			for (int i = 0; i < callSign.length; i++) {
 				if (aircraftList.get(callSign[i].getModes()) != null) {
 					aircraftList.get(callSign[i].getModes()).add(callSign[i]);
