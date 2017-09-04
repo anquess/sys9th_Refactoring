@@ -2,13 +2,8 @@ package n4.TG.framework;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import casestudy.Callsign;
-import casestudy.DbItem;
 import casestudy.Position;
 import casestudy.Velocity2;
 import n4.dao.ConnectionFactory;
@@ -16,14 +11,11 @@ import n4.dao.GetCallSignDao;
 import n4.dao.GetPositionDao;
 import n4.dao.GetVelocityDao;
 
-public abstract class AircraftFactory {
+public abstract class AircraftFactory extends Thread {
 
-	private Map<String, List<DbItem>> aircraftList = new HashMap<String, List<DbItem>>();
-
-	public void makeAircraftList() {
+	public void makeAircraftField(AircraftObjList aircraftObjList) {
 
 		try {
-
 			Connection connection1 = null;
 			Connection connection2 = null;
 			Connection connection3 = null;
@@ -42,40 +34,69 @@ public abstract class AircraftFactory {
 			try {
 				position = positionDao.findposi();
 				for (int i = 0; i < position.length; i++) {
-					aircraftList.put(position[i].getModes(), new ArrayList<DbItem>());
-					aircraftList.get(position[i].getModes()).add(position[i]);
+					AircraftObj aircraftObj = new AircraftObj();
+					aircraftObj.setPosition(
+							position[i].getModes(),
+							position[i].getTimestamp(),
+							position[i].getLat(),
+							position[i].getLng(),
+							position[i].getAlt()
+						);
+					aircraftObjList.appendAircraft(aircraftObj);
 				}
+
 
 			} catch (NullPointerException e) {
 				System.err.println("AirCraftSerch 80");
 				e.printStackTrace();
 			}
+
 			velocity = velocityDao.findvelo(position);
 			for (int i = 0; i < velocity.length; i++) {
-				if (aircraftList.get(velocity[i].getModes()) != null) {
-					aircraftList.get(velocity[i].getModes()).add(velocity[i]);
+				if (aircraftObjList.aircraftList.get(velocity[i].getModes()) != null) {
+					aircraftObjList.aircraftList.get(velocity[i].getModes()).setVelocity(
+							velocity[i].getH_velo(),
+							velocity[i].getV_velo(),
+							velocity[i].getH_dir(),
+							velocity[i].getV_dir()
+						);
 				}
 			}
 			callSign = callSignDao.findcall(position);
 			for (int i = 0; i < callSign.length; i++) {
-				if (aircraftList.get(callSign[i].getModes()) != null) {
-					aircraftList.get(callSign[i].getModes()).add(callSign[i]);
+				if (aircraftObjList.aircraftList.get(callSign[i].getModes()) != null) {
+					aircraftObjList.aircraftList.get(callSign[i].getModes()).setCallsign(
+							callSign[i].getCallsign()
+						);
 				}
+			}
+
+			if(connection1 != null){
+				connection1.close();
+				System.out.println("1クローズ完了だよー");
+			}
+			if(connection2 != null){
+				connection2.close();
+				System.out.println("2クローズ完了だよー");
+			}
+			if(connection3 != null){
+				connection3.close();
+				System.out.println("3クローズ完了だよー");
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+
 	}
 
-	public abstract AircraftObj createAircaraft();
+	public abstract AircraftObjList createAircaraft();
 
-	public AircraftObj create(){
-		makeAircraftList();
-		AircraftObj aircraftObj= createAircaraft();
-
-		return aircraftObj;
+	public AircraftObjList create(){
+		AircraftObjList aircraftObjList= createAircaraft();
+		makeAircraftField(aircraftObjList);
+		return aircraftObjList;
 	}
 
 

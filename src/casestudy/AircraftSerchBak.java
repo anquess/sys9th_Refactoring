@@ -29,7 +29,7 @@ import n4.dao.GetVelocityDao;
  *
  */
 
-public class AircraftSerch  extends Thread {
+public class AircraftSerchBak  extends Thread {
 	/**
 	 * スレッド内の無限ループのon,off
 	 * trueなら無限ループ、falseなら無限ループからでる。
