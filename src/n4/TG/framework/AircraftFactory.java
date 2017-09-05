@@ -35,14 +35,17 @@ public abstract class AircraftFactory extends Thread {
 				position = positionDao.findposi();
 				for (int i = 0; i < position.length; i++) {
 					AircraftObj aircraftObj = new AircraftObj();
-					aircraftObj.setPosition(
-							position[i].getModes(),
-							position[i].getTimestamp(),
-							position[i].getLat(),
-							position[i].getLng(),
-							position[i].getAlt()
-						);
-					aircraftObjList.appendAircraft(aircraftObj);
+					if (position[i] != null) {
+						aircraftObj.setPosition(
+								position[i].getModes(),
+								position[i].getTimestamp(),
+								position[i].getLat(),
+								position[i].getLng(),
+								position[i].getAlt()
+							);
+						aircraftObjList.appendAircraft(aircraftObj);
+					}
+
 				}
 
 
