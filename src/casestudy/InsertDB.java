@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import analyzer.casestudy.DB_Item_CallSign;
 import analyzer.casestudy.DB_Item_PlanePosition;
 import analyzer.casestudy.DB_Item_Velocity;
+import debug.DebugPrint;
 import n4.dao.ConnectionFactory;
 
 /**
@@ -26,13 +27,14 @@ public class InsertDB {
 //			Context context = new InitialContext();
 //			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
 			connection = ConnectionFactory.getConnection();
-			System.out.println("接続完了call");
+			DebugPrint.debugPrint("Call接続完了");
+//			System.out.println("接続完了call");
 
 			CallsignDAO InsCallsign =new CallsignDAO(connection);
 			InsCallsign.insertcallsign(callsign);
 
 		}catch (SQLException e) {
-			System.out.println("1登録に失敗しました");
+			System.err.println("1登録に失敗しました");
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
@@ -41,15 +43,20 @@ public class InsertDB {
 		try {
 			if(connection != null){
 				connection.close();
-				System.out.println("クローズ完了");
+				DebugPrint.debugPrint("Callクローズ完了");
+//				System.out.println("クローズ完了");
 			}
 		} catch(SQLException e) {
 				e.printStackTrace();
 		}
 
-		System.out.println("以下の内容を登録しました");
-		System.out.println(callsign.getModeSAddress());
-		System.out.println(callsign.getCallSign());
+		DebugPrint.debugPrint("以下の内容を登録しました");
+		DebugPrint.debugPrint(callsign.getModeSAddress());
+		DebugPrint.debugPrint(callsign.getCallSign());
+
+//		System.out.println("以下の内容を登録しました");
+//		System.out.println(callsign.getModeSAddress());
+//		System.out.println(callsign.getCallSign());
 
 	}
 
@@ -64,13 +71,14 @@ public class InsertDB {
 //			Context context = new InitialContext();
 //			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
 			connection = ConnectionFactory.getConnection();
-			System.out.println("接続完了posi");
+			DebugPrint.debugPrint("Position接続完了");
+//			System.out.println("接続完了posi");
 
 			PositionDAO InsPosition =new PositionDAO(connection);
 			InsPosition.insertposition(position);
 
 		}catch (SQLException e) {
-			System.out.println("2登録に失敗しました");
+			System.err.println("2登録に失敗しました");
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
@@ -79,17 +87,24 @@ public class InsertDB {
 		try {
 			if(connection != null){
 				connection.close();
-				System.out.println("クローズ完了");
+				DebugPrint.debugPrint("Positionクローズ完了");
+//				System.out.println("クローズ完了");
 			}
 		} catch(SQLException e) {
 				e.printStackTrace();
 		}
 
-		System.out.println("以下の内容を登録しました");
-		System.out.println(position.getModeSAddress());
-		System.out.println(position.getPlanePosition().getLon());
-		System.out.println(position.getPlanePosition().getLat());
-		System.out.println(position.getPlanePosition().getAlt());
+		DebugPrint.debugPrint("以下の内容を登録しました");
+		DebugPrint.debugPrint(position.getModeSAddress());
+		DebugPrint.debugPrint(position.getPlanePosition().getLon());
+		DebugPrint.debugPrint(position.getPlanePosition().getLat());
+		DebugPrint.debugPrint(position.getPlanePosition().getAlt());
+
+//		System.out.println("以下の内容を登録しました");
+//		System.out.println(position.getModeSAddress());
+//		System.out.println(position.getPlanePosition().getLon());
+//		System.out.println(position.getPlanePosition().getLat());
+//		System.out.println(position.getPlanePosition().getAlt());
 	}
 
 	/**
@@ -103,13 +118,14 @@ public class InsertDB {
 //			Context context = new InitialContext();
 //			DataSource ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
 			connection = ConnectionFactory.getConnection();
-			System.out.println("接続完了velo");
+			DebugPrint.debugPrint("Velocity接続完了");
+//			System.out.println("接続完了velo");
 
 			VelocityDAO InsVelocity =new VelocityDAO(connection);
 			InsVelocity.insertvelocity(velocity);
 
 		}catch (SQLException e) {
-			System.out.println("3登録に失敗しました");
+			System.err.println("3登録に失敗しました");
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
@@ -118,18 +134,26 @@ public class InsertDB {
 		try {
 			if(connection != null){
 				connection.close();
-				System.out.println("クローズ完了");
+				DebugPrint.debugPrint("Velocityクローズ完了");
+//				System.out.println("クローズ完了");
 			}
 		} catch(SQLException e) {
 				e.printStackTrace();
 		}
 
-		System.out.println("以下の内容を登録しました");
-		System.out.println("modeS=" + velocity.getModeSAddress());
-		System.out.println("S_Vr=" + velocity.getVelocity().getS_Vr());
-		System.out.println("Vr=" + velocity.getVelocity().getVr());
-		System.out.println("Deg=" + velocity.getVelocity().getDeg());
-		System.out.println("Vel=" + velocity.getVelocity().getVel());
+		DebugPrint.debugPrint("以下の内容を登録しました");
+		DebugPrint.debugPrint("modeS=" + velocity.getModeSAddress());
+		DebugPrint.debugPrint("S_Vr=" + velocity.getVelocity().getS_Vr());
+		DebugPrint.debugPrint("Vr=" + velocity.getVelocity().getVr());
+		DebugPrint.debugPrint("Deg=" + velocity.getVelocity().getDeg());
+		DebugPrint.debugPrint("Vel=" + velocity.getVelocity().getVel());
+
+//		System.out.println("以下の内容を登録しました");
+//		System.out.println("modeS=" + velocity.getModeSAddress());
+//		System.out.println("S_Vr=" + velocity.getVelocity().getS_Vr());
+//		System.out.println("Vr=" + velocity.getVelocity().getVr());
+//		System.out.println("Deg=" + velocity.getVelocity().getDeg());
+//		System.out.println("Vel=" + velocity.getVelocity().getVel());
 
 	}
 }

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import analyzer.casestudy.DB_Item_PlanePosition;
+import debug.DebugPrint;
 
 
 /**
@@ -124,14 +125,15 @@ public class PositionDAO {
 
 		}catch (SQLException e){
 
-			  System.out.println("SQLException:" + e.getMessage());
+			  System.err.println("SQLException:" + e.getMessage());
 
 		}finally{
 
 			if(stmt != null){
 				stmt.close();
 			}
-			System.out.println("Positionテーブルリセット完了");
+			DebugPrint.debugPrint("Positionテーブルリセット完了");
+//			System.out.println("Positionテーブルリセット完了");
 
 		}
 
@@ -148,12 +150,12 @@ public class PositionDAO {
 
 			DBWriter dbWriter = new DBWriter(con);
 			dbWriter.createCSV("position");
-
-			System.out.println("エクスポート完了");
+			DebugPrint.debugPrint("エクスポート完了");
+//			System.out.println("エクスポート完了");
 
 		}catch (Exception e) {
 			// 何らかのエラーがあっても表示するのみ
-			System.out.println("エラーです");
+			System.err.println("エラーです");
 			e.printStackTrace();
 		}
 

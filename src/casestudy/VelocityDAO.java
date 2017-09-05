@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import analyzer.casestudy.DB_Item_Velocity;
+import debug.DebugPrint;
 
 /**
  *
@@ -118,14 +119,15 @@ public class VelocityDAO {
 
 		}catch (SQLException e){
 
-			  System.out.println("SQLException:" + e.getMessage());
+			  System.err.println("SQLException:" + e.getMessage());
 
 		}finally{
 
 			if(stmt != null){
 				stmt.close();
 			}
-			System.out.println("Velocityテーブルリセット完了");
+			DebugPrint.debugPrint("Velocityテーブルリセット完了");
+//			System.out.println("Velocityテーブルリセット完了");
 
 		}
 
@@ -143,12 +145,12 @@ public class VelocityDAO {
 			DBWriter dbWriter = new DBWriter(con);
 
 			dbWriter.createCSV("velocity");
-
-			System.out.println("エクスポート完了");
+			DebugPrint.debugPrint("エクスポート完了");
+//			System.out.println("エクスポート完了");
 
 		}catch (Exception e) {
 			// 何らかのエラーがあっても表示するのみ
-			System.out.println("エラーです");
+			System.err.println("エラーです");
 			e.printStackTrace();
 		}
 

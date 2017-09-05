@@ -1,5 +1,7 @@
 package analyzer.casestudy;
 
+import debug.DebugPrint;
+
 /**
  * ADS-Bデータを受信し解析処理を呼び出すクラス
  */
@@ -18,7 +20,8 @@ public class RealData extends Thread{
 
 		/* SBS-3と接続 */
 		sao.connect();
-		System.out.println("*** SBS-3 接続 ***");
+		DebugPrint.debugPrint("*** SBS-3 接続 ***");
+//		System.out.println("*** SBS-3 接続 ***");
 
 		try{
 
@@ -34,7 +37,8 @@ public class RealData extends Thread{
 
 			/* SBS-3との接続を切断 */
 			sao.close();
-			System.out.println("*** SBS-3 切断 ***");
+			DebugPrint.debugPrint("*** SBS-3 切断 ***");
+//			System.out.println("*** SBS-3 切断 ***");
 		}
 
 	}
