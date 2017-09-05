@@ -28,14 +28,13 @@ public class XmlObjList extends AircraftObjList {
 	public void makeXml(){
 
 			try {
-				document = CreateXmlApi.createXMLDocument("aircrafts");
-				Element aircrafts = document.getDocumentElement();
-				document.appendChild(aircrafts);
+				Document xmlDocument = CreateXmlApi.createXMLDocument("aircrafts");
+				CreateXmlApi.createXMLString(xmlDocument);
 
 				for (Map.Entry<String, AircraftObj> entry: aircraftList.entrySet()) {
 					System.out.println("XML1機分作成");
 					Element aircraft = document.createElement("aircraft");
-					aircrafts.appendChild(aircraft);
+					xmlDocument.appendChild(aircraft);
 					aircraft.setAttribute("modeSaddress",entry.getValue().getModes());
 					aircraft.setAttribute("latitude",String.valueOf(entry.getValue().getLat()));
 					aircraft.setAttribute("longitude",String.valueOf(entry.getValue().getLng()));
@@ -54,22 +53,24 @@ public class XmlObjList extends AircraftObjList {
 					aircraft.setAttribute("h_dir",String.valueOf(entry.getValue().getH_dir()));
 					aircraft.setAttribute("v_dir",String.valueOf(entry.getValue().getV_dir()));
 
+					// XMLファイルの作成
+					File file = new File(Beans.getPwd()+"/N1/radar/Aircraft.xml");
+					file.delete();
+					try {
+						file.createNewFile();
+					} catch (IOException e) {
+						// TODO 自動生成された catch ブロック
+						e.printStackTrace();
+					}
+					write(file, xmlDocument);
+
 				}
 
-			} catch (ParserConfigurationException e) {
+			} catch (ParserConfigurationException | TransformerException e) {
 				e.printStackTrace();
 			}
 
-			// XMLファイルの作成
-			File file = new File(Beans.getPwd()+"/N1/radar/Aircraft.xml");
-			file.delete();
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-			write(file, document);
+
 
 
 
