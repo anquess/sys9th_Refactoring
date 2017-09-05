@@ -56,7 +56,7 @@ public abstract class AircraftFactory extends Thread {
 
 			velocity = velocityDao.findvelo(position);
 			for (int i = 0; i < velocity.length; i++) {
-				if (aircraftObjList.aircraftList.get(velocity[i].getModes()) != null) {
+				if (velocity[i] != null && aircraftObjList.aircraftList.get(velocity[i].getModes()) != null) {
 					aircraftObjList.aircraftList.get(velocity[i].getModes()).setVelocity(
 							velocity[i].getH_velo(),
 							velocity[i].getV_velo(),
@@ -67,7 +67,7 @@ public abstract class AircraftFactory extends Thread {
 			}
 			callSign = callSignDao.findcall(position);
 			for (int i = 0; i < callSign.length; i++) {
-				if (aircraftObjList.aircraftList.get(callSign[i].getModes()) != null) {
+				if (callSign[i] != null && aircraftObjList.aircraftList.get(callSign[i].getModes()) != null) {
 					aircraftObjList.aircraftList.get(callSign[i].getModes()).setCallsign(
 							callSign[i].getCallsign()
 						);
