@@ -57,10 +57,8 @@ public class AircraftSerch  extends Thread {
 				connection2 = ConnectionFactory.getConnection();
 				connection3 = ConnectionFactory.getConnection();
 
-
-
-
-				System.out.println("DB読み込み用接続完了");
+//				System.out.println("DB読み込み用接続完了");
+				DebugPrint.debugPrint("DB読み込み用接続完了");
 
 				GetPositionDao positionDao = new GetPositionDao(connection1);
 				GetVelocityDao velocityDao = new GetVelocityDao(connection2);
