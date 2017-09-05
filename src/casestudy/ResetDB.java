@@ -3,6 +3,7 @@ package casestudy;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import debug.DebugPrint;
 import n4.dao.ConnectionFactory;
 
 
@@ -20,7 +21,8 @@ public class ResetDB {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
 		}
-		System.out.println("DB接続完了");
+		DebugPrint.debugPrint("DB接続完了");
+//		System.out.println("DB接続完了");
 
 		//Statement stmt = null;
 
@@ -43,7 +45,7 @@ public class ResetDB {
 
 		}catch (SQLException e){
 
-			  System.out.println("SQLException:" + e.getMessage());
+			  System.err.println("SQLException:" + e.getMessage());
 
 		}
 

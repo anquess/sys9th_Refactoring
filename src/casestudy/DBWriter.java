@@ -38,7 +38,7 @@ public class DBWriter {
 //		String fileName = repoChooser.getDir() + sdf.format(timeStamp_) + " " + type + " " + repoChooser.getFileName() + ".csv";
 
 
-		String fileName = "X:\\Public\\システム8期\\CSV_Export\\" + type + ".csv";
+		String fileName = "X:\\share\\Public\\システム8期\\CSV_Export\\" + type + ".csv";
 		String sql = "SELECT * FROM " + type;
 
 		Vector<String> datas = new Vector<String>(); // データ格納用の可変長配列

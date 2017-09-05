@@ -2,6 +2,7 @@ package casestudy;
 
 import java.sql.Connection;
 
+import debug.DebugPrint;
 import n4.dao.ConnectionFactory;
 /**
  *
@@ -23,7 +24,8 @@ public class ExportCSV {
 		try {
 
 			con = ConnectionFactory.getConnection();
-			System.out.println("接続完了");
+			DebugPrint.debugPrint("接続完了");
+//			System.out.println("接続完了");
 
 			CallsignDAO caDAO = new CallsignDAO(con);
 			VelocityDAO veDAO = new VelocityDAO(con);
@@ -38,7 +40,7 @@ public class ExportCSV {
 
 		}catch (Exception e) {
 			// 何らかのエラーがあっても表示するのみ
-			System.out.println("エラーです");
+			System.err.println("エラーです");
 			e.printStackTrace();
 		}
 

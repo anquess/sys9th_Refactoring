@@ -17,6 +17,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import debug.DebugPrint;
 import n4.dao.ConnectionFactory;
 import n4.dao.GetCallSignDao;
 import n4.dao.GetPositionDao;
@@ -56,10 +57,8 @@ public class AircraftSerch  extends Thread {
 				connection2 = ConnectionFactory.getConnection();
 				connection3 = ConnectionFactory.getConnection();
 
-
-
-
-				System.out.println("DB読み込み用接続完了");
+//				System.out.println("DB読み込み用接続完了");
+				DebugPrint.debugPrint("DB読み込み用接続完了");
 
 				GetPositionDao positionDao = new GetPositionDao(connection1);
 				GetVelocityDao velocityDao = new GetVelocityDao(connection2);
@@ -67,7 +66,8 @@ public class AircraftSerch  extends Thread {
 				try{
 					position = positionDao.findposi();
 				}catch(NullPointerException e){
-					System.err.println("AirCraftSerch 80");
+					DebugPrint.debugPrint("AirCraftSerch 80");
+//					System.err.println("AirCraftSerch 80");
 					e.printStackTrace();
 				}
 				velocity = velocityDao.findvelo(position);
@@ -77,18 +77,22 @@ public class AircraftSerch  extends Thread {
 //				Thread.sleep(3000);
 
 				if(position == null || callSign == null || velocity == null ){
-					System.out.println("そのような航空機はいません");
+//					System.err.println("そのような航空機はいません");
+					DebugPrint.debugPrint("そのような航空機はいません");
 				}else{
 					int i=0;
 					int k=0;
 						if(position[0]==null){
-							System.out.println("Position is null");
+							DebugPrint.debugPrint("Position is null");
+//							System.out.println("Position is null");
 						}
 						if(velocity[0]==null){
-							System.out.println("Velocity is null");
+//							System.out.println("Velocity is null");
+							DebugPrint.debugPrint("Velocity is null");
 						}
 						if(callSign[0]==null){
-							System.out.println("CallSign is null");
+//							System.out.println("CallSign is null");
+							DebugPrint.debugPrint("CallSign is null");
 						}
 
 /*						while(position[i]!=null){
@@ -124,7 +128,8 @@ public class AircraftSerch  extends Thread {
 						document.appendChild(aircrafts);
 
 						while(position[i]!=null){
-							System.out.println("XML1機分作成");
+//							System.out.println("XML1機分作成");
+							DebugPrint.debugPrint("XML1機分作成");
 							Element aircraft = document.createElement("aircraft");
 							aircrafts.appendChild(aircraft);
 							aircraft.setAttribute("modeSaddress",position[i].getModes());
@@ -167,15 +172,18 @@ public class AircraftSerch  extends Thread {
 			try {
 				if(connection1 != null){
 					connection1.close();
-					System.out.println("1クローズ完了だよー");
+					DebugPrint.debugPrint("1クローズ完了だよー");
+//					System.out.println("1クローズ完了だよー");
 				}
 				if(connection2 != null){
 					connection2.close();
-					System.out.println("2クローズ完了だよー");
+					DebugPrint.debugPrint("2クローズ完了だよー");
+//					System.out.println("2クローズ完了だよー");
 				}
 				if(connection3 != null){
 					connection3.close();
-					System.out.println("3クローズ完了だよー");
+					DebugPrint.debugPrint("3クローズ完了だよー");
+//					System.out.println("3クローズ完了だよー");
 				}
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
@@ -184,7 +192,7 @@ public class AircraftSerch  extends Thread {
 
 
 		}	// While文終了
-
+/*
 		try{
 			if(connection1 != null){
 				connection1.close();
@@ -203,7 +211,7 @@ public class AircraftSerch  extends Thread {
 			System.err.println("AirCraftSerch 197");
 			e.printStackTrace();
 		}
-
+*/
 
 
 	}

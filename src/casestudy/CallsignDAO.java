@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import analyzer.casestudy.DB_Item_CallSign;
+import debug.DebugPrint;
 
 /**
  *
@@ -46,7 +47,8 @@ public class CallsignDAO {
 				//stmt = ;
 				stmt.setString(1,posi[i].getModes());
 				res = stmt.executeQuery();//sqlをとってくる
-				System.out.print(posi[i].getModes());
+				DebugPrint.debugPrint(posi[i].getModes());
+//				System.out.print(posi[i].getModes());
 				if(res.next()){
 					call[i] = new Callsign(//列の名前を書く.その列のデータをとってきてくれる
 							res.getString("modes"),
@@ -112,14 +114,15 @@ public class CallsignDAO {
 
 		}catch (SQLException e){
 
-			  System.out.println("SQLException:" + e.getMessage());
+			  System.err.println("SQLException:" + e.getMessage());
 
 		}finally{
 
 			if(stmt != null){
 				stmt.close();
 			}
-			System.out.println("Callsignテーブルリセット完了");
+			DebugPrint.debugPrint("Callsignテーブルリセット完了");
+//			System.out.println("Callsignテーブルリセット完了");
 
 		}
 
@@ -137,12 +140,12 @@ public class CallsignDAO {
 
 			DBWriter dbWriter = new DBWriter(con);
 			dbWriter.createCSV("callsign");
-
-			System.out.println("エクスポート完了");
+			DebugPrint.debugPrint("エクスポート完了");
+//			System.out.println("エクスポート完了");
 
 		}catch (Exception e) {
 			// 何らかのエラーがあっても表示するのみ
-			System.out.println("エラーです");
+			System.err.println("エラーです");
 			e.printStackTrace();
 		}
 
