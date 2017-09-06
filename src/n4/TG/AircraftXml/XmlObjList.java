@@ -21,20 +21,18 @@ import n4.TG.framework.AircraftObjList;
 
 
 public class XmlObjList extends AircraftObjList {
-	private Document document;
-
-
 
 	public void makeXml(){
 
 			try {
 				Document xmlDocument = CreateXmlApi.createXMLDocument("aircrafts");
-				CreateXmlApi.createXMLString(xmlDocument);
+				Element root = xmlDocument.getDocumentElement();
+
 
 				for (Map.Entry<String, AircraftObj> entry: aircraftList.entrySet()) {
 					System.out.println("XML1機分作成");
-					Element aircraft = document.createElement("aircraft");
-					xmlDocument.appendChild(aircraft);
+
+					Element aircraft = xmlDocument.createElement("aircraft");
 					aircraft.setAttribute("modeSaddress",entry.getValue().getModes());
 					aircraft.setAttribute("latitude",String.valueOf(entry.getValue().getLat()));
 					aircraft.setAttribute("longitude",String.valueOf(entry.getValue().getLng()));
@@ -53,6 +51,8 @@ public class XmlObjList extends AircraftObjList {
 					aircraft.setAttribute("h_dir",String.valueOf(entry.getValue().getH_dir()));
 					aircraft.setAttribute("v_dir",String.valueOf(entry.getValue().getV_dir()));
 
+					root.appendChild(aircraft);
+
 					// XMLファイルの作成
 					File file = new File(Beans.getPwd()+"/N1/radar/Aircraft.xml");
 					file.delete();
@@ -66,7 +66,7 @@ public class XmlObjList extends AircraftObjList {
 
 				}
 
-			} catch (ParserConfigurationException | TransformerException e) {
+			} catch (ParserConfigurationException e) {
 				e.printStackTrace();
 			}
 
