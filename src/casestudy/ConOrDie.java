@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import analyzer.casestudy.RealData;
+import n4.TG.TgController;
 
 
 
@@ -107,14 +108,14 @@ public class ConOrDie extends HttpServlet {
 		if(numXml==1 && t.isXml() != true){
 
 
-			t.getAcs().dox = true;
-			t.getAcs().start();
+			t.getTgc().dox = true;
+			t.getTgc().start();
 			t.setXml(true);
 		}else if(numXml==0){
 
-			t.getAcs().dox=false;
-			AircraftSerch acs = new AircraftSerch();
-			t.setAcs(acs);
+			t.getTgc().dox=false;
+			TgController tgc = new TgController();
+			t.setTgc(tgc);
 			t.setXml(false);
 		}
 
@@ -123,7 +124,7 @@ public class ConOrDie extends HttpServlet {
 
 
 
-	
+
 
 		response.sendRedirect("N1/administrator.jsp");
 	}

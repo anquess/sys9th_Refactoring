@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import analyzer.casestudy.RealData;
+import n4.TG.TgController;
 
 
 
@@ -52,10 +53,10 @@ public class MakeScope extends HttpServlet {
 
 			if(t==null){
 				RealData rd = new RealData();
-				AircraftSerch acs = new AircraftSerch();
+				TgController tgc = new TgController();
 				Beans beans = new Beans();
 				beans.setRd(rd);
-				beans.setAcs(acs);
+				beans.setTgc(tgc);
 				application.setAttribute("beans",beans);
 			}else{
 

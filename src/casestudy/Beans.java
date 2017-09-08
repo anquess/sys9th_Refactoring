@@ -3,6 +3,7 @@ package casestudy;
 import java.io.Serializable;
 
 import analyzer.casestudy.RealData;
+import n4.TG.TgController;
 
 /**
  *
@@ -12,7 +13,11 @@ import analyzer.casestudy.RealData;
  */
 public class Beans implements Serializable{
 	// private static final long serialVersionUID = 1L;
-	 private AircraftSerch acs;
+//	 private AircraftSerch acs;
+
+	 private TgController tgc;
+
+
 	 private RealData rd;
 	 private boolean isIn = false;
 	 private boolean isXml = false;
@@ -28,12 +33,12 @@ public class Beans implements Serializable{
 	public void setPwd(String pwd) {
 		Beans.pwd = pwd;
 	}
-	public AircraftSerch getAcs() {
-		return acs;
-	}
-	public void setAcs(AircraftSerch acs) {
-		this.acs = acs;
-	}
+//	public AircraftSerch getAcs() {
+//		return acs;
+//	}
+//	public void setAcs(AircraftSerch acs) {
+//		this.acs = acs;
+//	}
 	public RealData getRd() {
 		return rd;
 	}
@@ -59,5 +64,12 @@ public class Beans implements Serializable{
 	}
 	public void setLogin(boolean isLogin) {
 		this.isLogin = isLogin;
+	}
+
+	public TgController getTgc() {
+		return tgc;
+	}
+	public void setTgc(TgController tgc) {
+		this.tgc = tgc;
 	}
 }
